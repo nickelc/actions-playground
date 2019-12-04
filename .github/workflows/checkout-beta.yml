@@ -14,7 +14,6 @@ jobs:
           ref: master
           path: SDK.wiki
       - run: |
-        ls -la .. || true
-        ls -la . || true
-
-        cat README.md || true
+          ls -la .. || true
+          ls -la . || true
+          cat README.md || true
