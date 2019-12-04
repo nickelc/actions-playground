@@ -1,0 +1,20 @@
+name: checkout-v2-beta
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2-beta
+      - uses: actions/checkout@v2-beta
+        with:
+          repository: modio/SDK.wiki
+          ref: master
+          path: SDK.wiki
+      - run: |
+        ls -la .. || true
+        ls -la . || true
+
+        cat README.md || true
