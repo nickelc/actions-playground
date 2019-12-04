@@ -1,0 +1,20 @@
+name: Upload to modio
+
+on: [push, pull_request]
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: |
+          echo "Hello World!" > mod.txt
+          zip modfile.zip mod.txt
+
+      - uses: nickelc/upload-to-modio@v1
+        with:
+          test-env: true
+          token: ${{ secrets.MODIO_TOKEN }}
+          game: 206
+          mod: 1041
+          path: modfile.zip

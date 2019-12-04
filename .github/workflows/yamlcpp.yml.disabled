@@ -1,0 +1,16 @@
+name: yamlcpp
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download debs
+        run: |
+          wget http://archive.ubuntu.com/ubuntu/pool/main/y/yaml-cpp/libyaml-cpp-dev_0.6.2-4fakesync1_amd64.deb
+          wget http://archive.ubuntu.com/ubuntu/pool/main/y/yaml-cpp/libyaml-cpp0.6_0.6.2-4fakesync1_amd64.deb
+      - name: Install debs
+        run: |
+          sudo dpkg -i libyaml-cpp0.6_0.6.2-4fakesync1_amd64.deb
+          sudo dpkg -i libyaml-cpp-dev_0.6.2-4fakesync1_amd64.deb

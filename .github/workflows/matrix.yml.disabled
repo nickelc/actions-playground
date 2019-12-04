@@ -1,0 +1,36 @@
+name: matrix
+
+on: push
+
+jobs:
+  test:
+    name: ${{ matrix.os }}-${{ matrix.compiler }}/shared=${{ matrix.shared }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-16.04
+          - ubuntu-18.04
+          - windows-2019
+          - macOS-10.14
+
+        compiler: [gcc, clang]
+        shared: [on, off]
+
+        include:
+          - compiler: gcc
+            cpp-compiler: g++
+          - compiler: clang
+            cpp-compiler: clang++
+
+        exclude:
+          - os: windows-2019
+            compiler: gcc
+
+    steps:
+      - run:
+          echo "shared=${{ matrix.shared }}"
+        env:
+          CC: ${{ matrix.compiler }}
+          CXX: ${{ matrix.cpp-compiler }}
