@@ -8,9 +8,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: nickelc/checkout@test-post
+        uses: actions/checkout@v2-beta
       - name: Checkout wiki
-        uses: nickelc/checkout@test-post
+        uses: actions/checkout@v2-beta
         with:
           repository: nickelc/actions-playground.wiki
           ref: master
