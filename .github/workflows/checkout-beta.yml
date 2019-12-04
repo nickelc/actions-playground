@@ -7,13 +7,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2-beta
-      - uses: actions/checkout@v2-beta
+      - name: Checkout
+        uses: actions/checkout@v2-beta
+      - name: Checkout wiki
+        uses: actions/checkout@v2-beta
         with:
-          repository: modio/SDK.wiki
+          repository: nickelc/actions-playground.wiki
           ref: master
-          path: SDK.wiki
+          path: wiki
       - run: |
-          ls -la .. || true
+          echo "$GITHUB_WORKSPACE"
           ls -la . || true
           cat README.md || true
