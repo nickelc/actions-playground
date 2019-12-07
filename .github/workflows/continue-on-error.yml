@@ -1,0 +1,27 @@
+name: continue-on-error
+
+on: [pull_request, push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust: [stable, beta, nightly]
+
+        include:
+          - rust: nightly
+            continue-on-error: true
+            return: 1
+
+    steps:
+      - name: Print
+        continue-on-error: ${{ matrix.continue-on-error || false }}
+        run: |
+          echo "Hello"
+          exit ${{ matrix.return || 0 }}
+
+      - name: Print more
+        run: |
+          echo "World"
+
