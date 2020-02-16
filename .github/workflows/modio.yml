@@ -1,0 +1,37 @@
+name: Upload to modio
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: VorTechnix/Aground-Notebook
+          path: notebook
+      - name: Package
+        id: package
+        run: |
+          name="notebook"
+          tag=$(git describe --tags --abbrev=0)
+          filename="$notebook-$tag.zip"
+          cd notebook
+          zip "../$filename" *
+
+          echo "::set-output name=modfile::$filename"
+          echo "::set-output name=version::$tag"
+
+      - uses: nickelc/upload-to-modio@v1
+        with:
+          test-env: true
+          token: ${{ secrets.MODIO_TOKEN }}
+          game: 206
+          mod: 1041
+          version: ${{ steps.package.outputs.version }}
+          path: ${{ steps.package.outputs.modfile }}
