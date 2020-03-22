@@ -1,0 +1,19 @@
+name: grcov
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - run: tar --help
+        shell: bash
+
+      - run: |
+          Invoke-WebRequest -Uri "https://github.com/mozilla/grcov/releases/download/v0.5.9/grcov-win-x86_64.tar.bz2" -OutFile "grcov.tar.bz2"
+
+      - run: tar xf grcov.tar.bz2
+        shell: bash
+      - run: ls -l
+        shell: bash
