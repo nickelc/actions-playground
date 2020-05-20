@@ -18,10 +18,13 @@ jobs:
       - run: pacman -Ql automake autoconf
       - shell: bash
         run: env
+      - run: set
       - run: Get-ChildItem -Path C:\msys64\mingw64\bin -Recurse
       - run: Get-ChildItem -Path C:\msys64\usr\bin -Recurse
-      - run: autoreconf --help
-      # - run: cargo build
+      - shell: bash
+        run: autoreconf --help
+      - shell: bash
+        run: cargo build
       # - uses: numworks/setup-msys2@v1
       # - uses: ./.github/actions/setup-msys2
       # - run: msys2do uname -a
