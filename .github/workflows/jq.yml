@@ -14,6 +14,9 @@ jobs:
           echo '::add-path::C:\msys64\mingw64\bin'
           echo '::add-path::C:\msys64\usr\bin'
       - run: pacman -V
+      - run: pacman --noconfirm -S automake autoconf
+      - run: pacman --noconfirm -S mingw-w64-x86_64-toolchain
+      - run: cargo build
       # - uses: numworks/setup-msys2@v1
       # - uses: ./.github/actions/setup-msys2
       # - run: msys2do uname -a
