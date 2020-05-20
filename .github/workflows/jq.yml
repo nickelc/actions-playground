@@ -9,10 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: setup path
-        shell: bash
         run: |
-          echo '::add-path::C:\msys64\mingw64\bin'
-          echo '::add-path::C:\msys64\usr\bin'
+          echo ::add-path::C:\msys64\mingw64\bin
+          echo ::add-path::C:\msys64\usr\bin
       - run: pacman -V
       - run: pacman --noconfirm -S automake autoconf
       - run: pacman --noconfirm -S mingw-w64-x86_64-toolchain
@@ -21,7 +20,7 @@ jobs:
         run: env
       - run: Get-ChildItem -Path C:\msys64\mingw64\bin -Recurse
       - run: Get-ChildItem -Path C:\msys64\usr\bin -Recurse
-      - run: autoreconf -V
+      - run: autoreconf --help
       # - run: cargo build
       # - uses: numworks/setup-msys2@v1
       # - uses: ./.github/actions/setup-msys2
