@@ -8,14 +8,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+      - name: setup path
+        shell: bash
+        run: |
+          echo '::add-path::C:\msys64\mingw64\bin'
+          echo '::add-path::C:\msys64\usr\bin'
+      - run: pacman -V
       # - uses: numworks/setup-msys2@v1
-      - uses: ./.github/actions/setup-msys2
-      - run: msys2do uname -a
-      - run: msys2do pacman --noconfirm -Sy pacman
+      # - uses: ./.github/actions/setup-msys2
+      # - run: msys2do uname -a
+      # - run: msys2do pacman --noconfirm -Sy pacman
       # - run: msys2do pacman --noconfirm -Syu
-      - run: msys2do pacman --noconfirm -S base-devel
-      - run: msys2do pacman --noconfirm -S automake autoconf
-      - run: msys2do pacman --noconfirm -S mingw-w64-x86_64-toolchain
-      - run: msys2do pacman --noconfirm -S mingw-w64-x86_64-rust
-      - run: msys2do pacman -Ql automake autoconf
-      - run: msys2do cargo build
+      # - run: msys2do pacman --noconfirm -S base-devel
+      # - run: msys2do pacman --noconfirm -S automake autoconf
+      # - run: msys2do pacman --noconfirm -S mingw-w64-x86_64-toolchain
+      # - run: msys2do pacman --noconfirm -S mingw-w64-x86_64-rust
+      # - run: msys2do pacman -Ql automake autoconf
+      # - run: msys2do cargo build
