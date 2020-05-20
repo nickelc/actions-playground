@@ -8,18 +8,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: install
-        shell: bash
-        run: |
-          pacman --noconfirm -S automake autoconf
-          cargo build
       # - uses: numworks/setup-msys2@v1
-      # - run: msys2do uname -a
-      # - run: msys2do pacman --noconfirm -Sy pacman
-      # - run: msys2do pacman --noconfirm -Syu
-      # - run: msys2do pacman --noconfirm -S automake autoconf
-      # - run: msys2do pacman --noconfirm -S base-devel
-      # - run: msys2do pacman --noconfirm -S mingw-w64-x86_64-toolchain
-      # - run: msys2do pacman --noconfirm -S mingw-w64-x86_64-rust
-      # - run: msys2do pacman -Ql automake autoconf
-      # - run: msys2do cargo build
+      - uses: ./.github/actions/setup-msys2
+      - run: msys2do uname -a
+      - run: msys2do pacman --noconfirm -Sy pacman
+      - run: msys2do pacman --noconfirm -Syu
+      - run: msys2do pacman --noconfirm -S automake autoconf
+      - run: msys2do pacman --noconfirm -S base-devel
+      - run: msys2do pacman --noconfirm -S mingw-w64-x86_64-toolchain
+      - run: msys2do pacman --noconfirm -S mingw-w64-x86_64-rust
+      - run: msys2do pacman -Ql automake autoconf
+      - run: msys2do cargo build
