@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Checkout Mod
+        uses: actions/checkout@v2
         with:
           repository: VorTechnix/Aground-Notebook
           path: notebook
@@ -27,7 +29,7 @@ jobs:
           echo "::set-output name=modfile::$filename"
           echo "::set-output name=version::$tag"
 
-      - uses: nickelc/upload-to-modio@v1
+      - uses: nickelc/upload-to-modio@v0.1.0
         with:
           test-env: true
           token: ${{ secrets.MODIO_TOKEN }}
