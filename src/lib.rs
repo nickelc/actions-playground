@@ -1,6 +1,7 @@
 #[macro_use]
 extern crate serde;
 
+/// test
 #[derive(Deserialize, Serialize)]
 pub struct TT {
     s: String,
