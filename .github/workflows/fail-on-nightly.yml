@@ -1,0 +1,19 @@
+name: matrix-on-nightly
+
+on: push
+
+jobs:
+  test:
+    name: Fail on nightly
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        rust:
+          - stable
+          - nightly
+
+    steps:
+      - run: echo ${{ matrix.rust }}
+      - run: exit 1
+        if: matrix.rust == 'nightly'
