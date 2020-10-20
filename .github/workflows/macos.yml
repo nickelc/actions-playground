@@ -4,13 +4,13 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
 
-      - run: brew install tree
+      # - run: brew install tree
 
       - name: Install toolchain
         id: tc
@@ -29,9 +29,9 @@ jobs:
             target
           key: ${{ runner.os }}-test-${{ steps.tc.outputs.rustc_hash }}-${{ hashFiles('**/Cargo.toml') }}
 
-      - run: tree -ugp target
+      # - run: tree -ugp target
 
       - name: Build all features
         run: cargo build --all-features
 
-      - run: tree -ugp target
+      # - run: tree -ugp target
