@@ -16,4 +16,5 @@ jobs:
     steps:
       - run: echo ${{ matrix.rust }}
       - run: exit 1
+        continue-on-error: ${{ matrix.rust == 'nightly' }}
         if: matrix.rust == 'nightly'
