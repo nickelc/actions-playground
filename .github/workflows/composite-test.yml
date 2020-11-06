@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/actions/toolchain
         with:
           components: asdf, qwertt,baz
