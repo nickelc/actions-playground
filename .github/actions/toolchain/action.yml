@@ -25,13 +25,9 @@ runs:
   using: 'composite'
   steps:
     - name: Test
-      shell: python
+      shell: bash
       env:
-        COMPONENTS: ${{ inputs.components }}
-      run: |
-        import os
-
-        print(os.environ)
-
-        l = list(map(str.strip, "${{ inputs.components }}".split(',')))
-        print(l)
+        INPUT_TOOLCHAIN: ${{ inputs.toolchain }}
+        INPUT_TARGETS: ${{ inputs.targets }}
+        INPUT_COMPONENTS: ${{ inputs.components }}
+      run: python ${{ github.action_path }}/main.py
