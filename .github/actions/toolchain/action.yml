@@ -23,11 +23,11 @@ outputs:
 
 runs:
   using: 'composite'
-  env:
-    COMPONENTS: ${{ inputs.components }}
   steps:
     - name: Test
       shell: python
+      env:
+        COMPONENTS: ${{ inputs.components }}
       run: |
         import os
 
