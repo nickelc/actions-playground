@@ -1,0 +1,31 @@
+name: rust-toolchain
+inputs:
+  toolchain:
+    description: 'Rust toolchain name'
+    required: false
+    default: 'stable'
+  targets:
+    description: 'Comma-separated list of targets to install'
+    default: ''
+  components:
+    description: 'Comma-separated list of components to install'
+    default: ''
+
+outputs:
+  rustc:
+    description: 'Installed rustc version'
+  rustc_hash:
+    description: 'Installed rustc version hash'
+  cargo:
+    description: 'Installed cargo version'
+  rustup:
+    description: 'Installed rustup version'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Test
+      shell: python
+      run: |
+        l = list(map(str.strip, "${{ inputs.components }}".split(',')))
+        print(l)
