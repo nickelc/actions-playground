@@ -24,10 +24,11 @@ outputs:
 runs:
   using: 'composite'
   steps:
+    - run: python -V
     - name: Test
       shell: bash
       env:
         INPUT_TOOLCHAIN: ${{ inputs.toolchain }}
         INPUT_TARGETS: ${{ inputs.targets }}
         INPUT_COMPONENTS: ${{ inputs.components }}
-      run: python ${{ github.action_path }}/main.py
+      run: python3 ${{ github.action_path }}/main.py
