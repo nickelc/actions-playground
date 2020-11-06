@@ -25,6 +25,7 @@ runs:
   using: 'composite'
   steps:
     - run: python -V
+      shell: bash
     - name: Test
       shell: bash
       env:
