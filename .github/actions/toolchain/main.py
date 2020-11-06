@@ -5,7 +5,7 @@ import os, subprocess
 def to_list(s):
     return [x for x in map(str.strip, s.split(',')) if len(x) > 0]
 
-toolchain = os.environ('INPUT_TOOLCHAIN', 'stable')
+toolchain = os.environ.get('INPUT_TOOLCHAIN', 'stable')
 
 targets = os.environ.get('INPUT_TARGETS', '')
 targets = ['-t', *to_list(targets)]
