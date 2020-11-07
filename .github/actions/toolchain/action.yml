@@ -24,10 +24,7 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - run: python -V
-      shell: bash
-    - name: Test
-      shell: bash
+    - shell: bash
       env:
         INPUT_TOOLCHAIN: ${{ inputs.toolchain }}
         INPUT_TARGETS: ${{ inputs.targets }}
