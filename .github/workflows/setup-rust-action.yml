@@ -1,0 +1,19 @@
+name: Test Outputs
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: nickelc/setup-rust-action@outputs
+        id: toolchain
+
+      - run: |
+          echo "${{ steps.toolchain.outputs.rustc }}"
+          echo "${{ steps.toolchain.outputs.rustc_hash }}"
+          echo "${{ steps.toolchain.outputs.cargo }}"
+          echo "${{ steps.toolchain.outputs.rustup }}"
