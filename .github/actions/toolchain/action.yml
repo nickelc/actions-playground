@@ -29,4 +29,9 @@ runs:
         INPUT_TOOLCHAIN: ${{ inputs.toolchain }}
         INPUT_TARGETS: ${{ inputs.targets }}
         INPUT_COMPONENTS: ${{ inputs.components }}
-      run: python3 ${{ github.action_path }}/main.py
+      run: |
+        if command -v python3 &> /dev/null; then
+          python3 $GITHUB_ACTION_PATH/main.py
+        else
+          python $GITHUB_ACTION_PATH/main.py
+        fi
