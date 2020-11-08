@@ -38,4 +38,4 @@ def debug(message):
 
 def set_output(name, value):
     '''Sets the action's output parameter'''
-    print(f'::set-output name={name}::{value}')
+    print('::set-output name={}::{}'.format(name, value))
