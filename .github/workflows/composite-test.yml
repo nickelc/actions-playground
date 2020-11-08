@@ -4,12 +4,25 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-16.04
+          - ubuntu-18.04
+          - ubuntu-20.04
+          - macos-10.13
+          - macos-10.14
+          - macos-10.15
+          - macos-11.0
+          - windows-2016
+          - windows-2019
 
     steps:
       - run: |
-          python -V
-          python3 -V
+          python -V || true
+          python3 -V || true
       - uses: actions/checkout@v2
       - uses: ./.github/actions/toolchain
         with:
