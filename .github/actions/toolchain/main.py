@@ -14,7 +14,7 @@ def to_list(value):
 
 def get_version(args):
     '''Return a version tuple from the process output'''
-    output = subprocess.check_output(args, encoding='utf-8')
+    output = subprocess.check_output(args).decode('utf-8')
     m = VERSION.match(output)
     return m.group(1, 3) if m else (None, None)
 
