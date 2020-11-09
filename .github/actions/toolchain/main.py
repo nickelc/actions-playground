@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 '''Rust toolchain installer'''
 
-import os
 import re
 import subprocess
-from actions import get_input, set_output, group
+from actions import get_input, set_output, group, execute
 
 VERSION = re.compile(r'\S+\s((\S+)\s\((?:(\S+)\s)?(\S+)\))')
 
@@ -26,10 +25,10 @@ targets = ['-t', *targets] if len(targets) > 0 else []
 components = to_list(get_input('components'))
 components = ['-c', *components] if len(components) > 0 else []
 
-subprocess.run(['rustup', 'self', 'update'])
-subprocess.run(['rustup', 'set', 'profile', 'minimal'])
+execute('rustup', ['self', 'update'])
+execute('rustup', ['set', 'profile', 'minimal'])
 
-subprocess.run(['rustup', 'toolchain', 'install', toolchain, *targets, *components])
+execute('rustup', ['toolchain', 'install', toolchain, *targets, *components])
 
 with group('Gathering version information'):
     version, hash_s = get_version(['rustc', '-V'])

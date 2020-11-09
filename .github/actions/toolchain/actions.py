@@ -1,6 +1,8 @@
 '''Utilities for GitHub Actions'''
 
 import os
+import shutil
+import subprocess
 from contextlib import contextmanager
 
 def get_input(name, default=''):
@@ -39,3 +41,9 @@ def debug(message):
 def set_output(name, value):
     '''Sets the action's output parameter'''
     print('::set-output name={}::{}'.format(name, value))
+
+def execute(cmd, args):
+    '''Execute a command'''
+    cmd = shutil.which(cmd)
+    print('[command]' + cmd + ' ' +  ' '.join(args))
+    subprocess.run([cmd, *args])
