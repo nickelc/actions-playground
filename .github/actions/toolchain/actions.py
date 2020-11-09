@@ -45,5 +45,5 @@ def set_output(name, value):
 def execute(cmd, args):
     '''Execute a command'''
     cmd = shutil.which(cmd)
-    print('[command]' + cmd + ' ' +  ' '.join(args))
+    print('[command]' + cmd + ' ' +  ' '.join(args), flush=True)
     subprocess.run([cmd, *args])
