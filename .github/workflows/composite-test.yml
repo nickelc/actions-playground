@@ -23,7 +23,6 @@ jobs:
           python -V || true
           python3 -V || true
         shell: bash
-      - uses: actions/checkout@v2
-      - uses: ./actions/toolchain
+      - uses: nickelc/actions-playground/actions/toolchain@composite-action
         with:
           components: rustfmt,clippy
