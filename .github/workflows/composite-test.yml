@@ -24,5 +24,11 @@ jobs:
           python3 -V || true
         shell: bash
       - uses: nickelc/actions-playground/actions/toolchain@composite-action
+        id: tc
         with:
           components: rustfmt,clippy
+      - run: |
+          echo ${{ steps.tc.outputs.rustc }}
+          echo ${{ steps.tc.outputs.rustc_hash }}
+          echo ${{ steps.tc.outputs.cargo }}
+          echo ${{ steps.tc.outputs.rustup }}
