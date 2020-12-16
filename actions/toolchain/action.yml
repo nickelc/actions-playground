@@ -6,25 +6,32 @@ inputs:
     default: 'stable'
   targets:
     description: 'Comma-separated list of targets to install'
+    required: false
     default: ''
   components:
     description: 'Comma-separated list of components to install'
+    required: false
     default: ''
 
 outputs:
   rustc:
     description: 'Installed rustc version'
+    value: ${{ steps.main.outputs.rustc }}
   rustc_hash:
     description: 'Installed rustc version hash'
+    value: ${{ steps.main.outputs.rustc_hash }}
   cargo:
     description: 'Installed cargo version'
+    value: ${{ steps.main.outputs.cargo }}
   rustup:
     description: 'Installed rustup version'
+    value: ${{ steps.main.outputs.rustup }}
 
 runs:
   using: 'composite'
   steps:
-    - shell: bash
+    - id: main
+      shell: bash
       env:
         INPUT_TOOLCHAIN: ${{ inputs.toolchain }}
         INPUT_TARGETS: ${{ inputs.targets }}
