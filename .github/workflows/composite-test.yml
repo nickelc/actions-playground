@@ -2,6 +2,10 @@ name: Composite Test
 
 on: [push, pull_request]
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -22,7 +26,6 @@ jobs:
       - run: |
           python -V || true
           python3 -V || true
-        shell: bash
       - uses: nickelc/actions-playground/actions/toolchain@composite-action
         id: tc
         with:
