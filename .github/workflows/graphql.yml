@@ -1,0 +1,14 @@
+name: graphql
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          gh api graphql -f query="$(cat github.query)"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

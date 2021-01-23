@@ -1,0 +1,44 @@
+{
+  r0: repository(owner: "ChariotEngine", name: "Chariot") {
+    ...repoFields
+  }
+  r1: repository(owner: "duysqubix", name: "MuOxi") {
+    ...repoFields
+  }
+  r2: repository(owner: "Gigoteur", name: "UnicornConsole") {
+    ...repoFields
+  }
+  r3: repository(owner: "Hossein-Noroozpour", name: "vulkust") {
+    ...repoFields
+  }
+  r4: repository(owner: "huxingyi", name: "dust3d") {
+    ...repoFields
+  }
+  r5: repository(owner: "I3ck", name: "rust-3d") {
+    ...repoFields
+  }
+  r6: repository(owner: "mun-lang", name: "mun") {
+    ...repoFields
+  }
+  r7: repository(owner: "naia-rs", name: "naia") {
+    ...repoFields
+  }
+  r8: repository(owner: "olson-sean-k", name: "plexus") {
+    ...repoFields
+  }
+  r9: repository(owner: "rsaarelm", name: "vitral") {
+    ...repoFields
+  }
+  r10: repository(owner: "Siebencorgie", name: "jakar-engine") {
+    ...repoFields
+  }
+  r11: repository(owner: "tuzz", name: "game-loop") {
+    ...repoFields
+  }
+}
+
+fragment repoFields on Repository {
+  repository: url
+  homepage: homepageUrl
+  description
+}
