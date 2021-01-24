@@ -27,5 +27,5 @@ jobs:
         run: |
           curl -sL https://static.crates.io/db-dump.tar.gz | \
               tar xz -O --strip-components=2 --no-anchored "crates.csv" | \
-              xsv select name,description,repository,homepage > crates.csv
+              ./xsv select name,description,repository,homepage > crates.csv
       - run: cat crates.csv
