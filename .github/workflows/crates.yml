@@ -1,0 +1,29 @@
+name: crates
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: install xsv
+        run: |
+          gh release download -R BurntSushi/xsv 0.13.0 -p '*x86_64-unknown-linux-musl*'
+          tar xf xsv-0.13.0-x86_64-unknown-linux-musl.tar.gz
+      - name: cache key
+        id: key
+        run: echo "::set-output name=value::$(date +%Y-%m-%d)"
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: crates.csv
+          key: ${{ steps.key.outputs.value }}
+      - name: get crates.csv
+        if: steps.cache.outputs.cache-hit != true
+        run: |
+          curl -sL https://static.crates.io/db-dump.tar.gz | \
+              tar xz -O --strip-components=2 --no-anchored "crates.csv" | \
+              xsv select name,description,repository,homepage > crates.csv
+      - run: cat crates.csv
