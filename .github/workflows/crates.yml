@@ -9,6 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: install xsv
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release download -R BurntSushi/xsv 0.13.0 -p '*x86_64-unknown-linux-musl*'
           tar xf xsv-0.13.0-x86_64-unknown-linux-musl.tar.gz
