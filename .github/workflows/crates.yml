@@ -23,7 +23,7 @@ jobs:
           path: crates.csv
           key: ${{ steps.key.outputs.value }}
       - name: get crates.csv
-        if: steps.cache.outputs.cache-hit != true
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           curl -sL https://static.crates.io/db-dump.tar.gz | \
               tar xz -O --strip-components=2 --no-anchored "crates.csv" | \
