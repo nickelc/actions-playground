@@ -7,6 +7,10 @@ pub struct TT {
     s: String,
 }
 
+fn main() {
+    println!("Hello World!");
+}
+
 #[cfg(test)]
 mod tests {
     #[test]
