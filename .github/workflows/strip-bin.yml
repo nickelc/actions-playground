@@ -27,4 +27,6 @@ jobs:
         with:
           targets: ${{ matrix.target }}
       - run: cargo build
-      - run: strip target/${{ matrix.target }}/debug/${{ matrix.bin }}
+      - run: |
+          ls -R target
+          strip target/${{ matrix.target }}/debug/${{ matrix.bin }}
