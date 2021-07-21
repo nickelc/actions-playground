@@ -1,0 +1,30 @@
+name: strip-bin
+
+on: [push]
+
+jobs:
+  build:
+    name: Build ${{ matrix.target }}
+
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-unknown-linux-gnu
+            os: ubuntu-latest
+            bin: playground
+          - target: x86_64-pc-windows-msvc
+            os: windows-latest
+            bin: playground.exe
+          - target: x86_64-apple-darwin
+            os: macos-latest
+            bin: playground
+
+    runs-on: ${{ matrix.target }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hecrj/setup-rust-action@v1
+        with:
+          targets: ${{ matrix.target }}
+      - run: cargo build
+      - run: strip target/${{ matrix.target }}/debug/${{ matrix.bin }}
