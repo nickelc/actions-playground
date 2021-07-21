@@ -19,7 +19,7 @@ jobs:
             os: macos-latest
             bin: playground
 
-    runs-on: ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v2
