@@ -26,7 +26,6 @@ jobs:
       - uses: hecrj/setup-rust-action@v1
         with:
           targets: ${{ matrix.target }}
-      - run: cargo build
+      - run: cargo build --target ${{ matrix.target }}
       - run: |
-          ls -R target
           strip target/${{ matrix.target }}/debug/${{ matrix.bin }}
