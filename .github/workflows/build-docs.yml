@@ -1,0 +1,36 @@
+name: publish docs
+
+on: [push, workflow_dispatch]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          cargo doc --no-deps
+
+          mkdir -p _site/master
+          mv target/doc/* _site/master/
+          echo "<meta http-equiv=\"refresh\" content=\"0;url=master/playground/index.html\">" > _site/index.html
+          echo "<meta http-equiv=\"refresh\" content=\"0;url=playground/index.html\">" > _site/master/index.html
+
+      - uses: actions/upload-pages-artifact@v1
+
+  deploy:
+    needs: [build]
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
