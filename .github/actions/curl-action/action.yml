@@ -30,6 +30,8 @@ runs:
   steps:
     - id: form
       shell: bash
+      env:
+        version: ${{ inputs.version }}
       run: |
         env
         curl_fields=()
