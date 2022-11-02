@@ -77,8 +77,7 @@ runs:
         fi
 
         echo ${curl_fields[@]}
-        echo $(for f in ${curl_fields[@]}; do echo -n ' -F' $f; done)
-        # echo "fields=$(for f in ${curl_fields[@]}; do echo -n ' -F' $f; done)" >> $GITHUB_OUTPUT
+        echo $(for i in ${!curl_fields[@]}; do echo -n ' -F' ${curl_fields[$i]}; done)
 
         cat $GITHUB_OUTPUT
 
