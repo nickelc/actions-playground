@@ -1,6 +1,30 @@
 name: curl action
 description: test action
 
+inputs:
+  version:
+    description: 'Version of the mod file'
+    required: false
+  changelog:
+    description: 'Changelog of the mod file'
+    required: false
+  changelog-path:
+    description: 'Path to changelog of the mod file'
+    required: false
+  active:
+    description: 'Label this upload as the current release (Default: true)'
+    required: false
+    default: 'true'
+  filehash:
+    description: 'Filehash of the mod file'
+    required: false
+  metadata:
+    description: 'Metadata blob of the mod file'
+    required: false
+  metadata-path:
+    description: 'Path to the metadata blob of the mod file'
+    required: false
+
 runs:
   using: composite
   steps:
