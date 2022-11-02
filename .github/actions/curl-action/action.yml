@@ -1,0 +1,41 @@
+name: curl action
+description: test action
+
+runs:
+  using: composite
+  steps:
+    - id: form
+      shell: bash
+      run: |
+        curl_fields=()
+
+        if [ -n "$INPUT_VERSION" ]; then
+            curl_fields+=("\"version=$INPUT_VERSION\"")
+        fi
+
+        if [ -n "$INPUT_CHANGELOG" ]; then
+            curl_fields+=("\"changelog=$INPUT_CHANGELOG\"")
+        elif [ -f "$INPUT_CHANGELOG_PATH" ]; then
+            curl_fields+=("\"changelog=<$INPUT_CHANGELOG_PATH\"")
+        fi
+
+        if [ "$INPUT_ACTIVE" = "true" ]; then
+            curl_fields+=('"active=true"')
+        elif [ "$INPUT_ACTIVE" = "false" ]; then
+            curl_fields+=('"active=false"')
+        fi
+
+        if [ -n "$INPUT_FILEHASH" ]; then
+            curl_fields+=("\"filehash=$INPUT_FILEHASH\"")
+        fi
+
+        if [ -n "$INPUT_METADATA" ]; then
+            curl_fields+=("\"metadata_blob=$INPUT_METADATA\"")
+        elif [ -f "$INPUT_METADATA_PATH" ]; then
+            curl_fields+=("\"metadata_blob=<$INPUT_METADATA_PATH\"")
+        fi
+
+        echo "fields=$(for f in ${curl_fields[@]}; do echo -n ' -F' $f; done)" >> $GITHUB_OUTPUT
+
+    - run: curl https://httpbin.org/post ${{ steps.form.outputs.fields }}
+      shell: bash
