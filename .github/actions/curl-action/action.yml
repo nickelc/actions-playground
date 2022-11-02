@@ -34,34 +34,46 @@ runs:
         version: ${{ inputs.version }}
         changelog: ${{ inputs.changelog }}
         changelog_path: ${{ inputs.changelog-path }}
+        active: ${{ inputs.active }}
+        filehash: ${{ inputs.filehash }}
+        metadata: ${{ inputs.metadata }}
+        metadata_path: ${{ inputs.metadata-path }}
       run: |
         env
         curl_fields=()
 
         if [ -n "$version" ]; then
-            curl_fields+=("\"version=$version\"")
+            file=$(mktemp -p $RUNNER_TMP version.XXXX)
+            echo $version >> $file
+            curl_fields+=("'version=<$file'")
         fi
 
         if [ -n "$changelog" ]; then
-            curl_fields+=("\"changelog=$changelog\"")
+            file=$(mktemp -p $RUNNER_TMP changelog.XXXX)
+            echo $changelog >> $file
+            curl_fields+=("'changelog=<$file'")
         elif [ -f "$changelog_path" ]; then
-            curl_fields+=("\"changelog=<$changelog_path\"")
+            curl_fields+=("'changelog=<$changelog_path'")
         fi
 
-        if [ "$INPUT_ACTIVE" = "true" ]; then
-            curl_fields+=('"active=true"')
-        elif [ "$INPUT_ACTIVE" = "false" ]; then
-            curl_fields+=('"active=false"')
+        if [ "$active" = "true" ]; then
+            curl_fields+=("'active=true'')
+        elif [ "$active" = "false" ]; then
+            curl_fields+=("'active=false'")
         fi
 
-        if [ -n "$INPUT_FILEHASH" ]; then
-            curl_fields+=("\"filehash=$INPUT_FILEHASH\"")
+        if [ -n "$filehash" ]; then
+            file=$(mktemp -p $RUNNER_TMP filehash.XXXX)
+            echo $filehash >> $file
+            curl_fields+=("'filehash=<$file'")
         fi
 
-        if [ -n "$INPUT_METADATA" ]; then
-            curl_fields+=("\"metadata_blob=$INPUT_METADATA\"")
-        elif [ -f "$INPUT_METADATA_PATH" ]; then
-            curl_fields+=("\"metadata_blob=<$INPUT_METADATA_PATH\"")
+        if [ -n "$metadata" ]; then
+            file=$(mktemp -p $RUNNER_TMP metadata.XXXX)
+            echo $metadata >> $file
+            curl_fields+=("'metadata_blob=<$file'")
+        elif [ -f "$metadata_path" ]; then
+            curl_fields+=("'metadata_blob=<$metadata_path'")
         fi
 
         echo "fields=$(for f in ${curl_fields[@]}; do echo -n ' -F' $f; done)" >> $GITHUB_OUTPUT
