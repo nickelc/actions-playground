@@ -39,7 +39,7 @@ runs:
         metadata: ${{ inputs.metadata }}
         metadata_path: ${{ inputs.metadata-path }}
       run: |
-        env
+        # env
         curl_fields=()
 
         if [ -n "$version" ]; then
@@ -76,6 +76,7 @@ runs:
             curl_fields+=("'metadata_blob=<$metadata_path'")
         fi
 
+        echo ${curl_fields[@])
         echo $(for f in ${curl_fields[@]}; do echo -n ' -F' $f; done)
         # echo "fields=$(for f in ${curl_fields[@]}; do echo -n ' -F' $f; done)" >> $GITHUB_OUTPUT
 
