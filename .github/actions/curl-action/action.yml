@@ -32,18 +32,20 @@ runs:
       shell: bash
       env:
         version: ${{ inputs.version }}
+        changelog: ${{ inputs.changelog }}
+        changelog_path: ${{ inputs.changelog-path }}
       run: |
         env
         curl_fields=()
 
-        if [ -n "$INPUT_VERSION" ]; then
-            curl_fields+=("\"version=$INPUT_VERSION\"")
+        if [ -n "$version" ]; then
+            curl_fields+=("\"version=$version\"")
         fi
 
-        if [ -n "$INPUT_CHANGELOG" ]; then
-            curl_fields+=("\"changelog=$INPUT_CHANGELOG\"")
-        elif [ -f "$INPUT_CHANGELOG_PATH" ]; then
-            curl_fields+=("\"changelog=<$INPUT_CHANGELOG_PATH\"")
+        if [ -n "$changelog" ]; then
+            curl_fields+=("\"changelog=$changelog\"")
+        elif [ -f "$changelog_path" ]; then
+            curl_fields+=("\"changelog=<$changelog_path\"")
         fi
 
         if [ "$INPUT_ACTIVE" = "true" ]; then
