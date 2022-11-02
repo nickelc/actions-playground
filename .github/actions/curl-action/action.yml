@@ -43,13 +43,13 @@ runs:
         curl_fields=()
 
         if [ -n "$version" ]; then
-            file=$(mktemp -p $RUNNER_TMP version.XXXX)
+            file=$(mktemp -p $RUNNER_TEMP version.XXXX)
             echo $version >> $file
             curl_fields+=("'version=<$file'")
         fi
 
         if [ -n "$changelog" ]; then
-            file=$(mktemp -p $RUNNER_TMP changelog.XXXX)
+            file=$(mktemp -p $RUNNER_TEMP changelog.XXXX)
             echo $changelog >> $file
             curl_fields+=("'changelog=<$file'")
         elif [ -f "$changelog_path" ]; then
@@ -63,13 +63,13 @@ runs:
         fi
 
         if [ -n "$filehash" ]; then
-            file=$(mktemp -p $RUNNER_TMP filehash.XXXX)
+            file=$(mktemp -p $RUNNER_TEMP filehash.XXXX)
             echo $filehash >> $file
             curl_fields+=("'filehash=<$file'")
         fi
 
         if [ -n "$metadata" ]; then
-            file=$(mktemp -p $RUNNER_TMP metadata.XXXX)
+            file=$(mktemp -p $RUNNER_TEMP metadata.XXXX)
             echo $metadata >> $file
             curl_fields+=("'metadata_blob=<$file'")
         elif [ -f "$metadata_path" ]; then
