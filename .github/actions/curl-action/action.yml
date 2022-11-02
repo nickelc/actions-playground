@@ -76,7 +76,7 @@ runs:
             curl_fields+=("'metadata_blob=<$metadata_path'")
         fi
 
-        echo ${curl_fields[@])
+        echo ${curl_fields[@]}
         echo $(for f in ${curl_fields[@]}; do echo -n ' -F' $f; done)
         # echo "fields=$(for f in ${curl_fields[@]}; do echo -n ' -F' $f; done)" >> $GITHUB_OUTPUT
 
