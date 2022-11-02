@@ -57,7 +57,7 @@ runs:
         fi
 
         if [ "$active" = "true" ]; then
-            curl_fields+=("'active=true'')
+            curl_fields+=("'active=true'")
         elif [ "$active" = "false" ]; then
             curl_fields+=("'active=false'")
         fi
