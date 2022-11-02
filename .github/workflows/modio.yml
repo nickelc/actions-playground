@@ -7,13 +7,13 @@ on:
 
 jobs:
   upload:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Checkout Mod
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: VorTechnix/Aground-Notebook
           path: notebook
@@ -22,14 +22,15 @@ jobs:
         run: |
           name="notebook"
           tag=$(git describe --tags --abbrev=0)
-          filename="$notebook-$tag.zip"
+          filename="$name-$tag.zip"
           cd notebook
           zip "../$filename" *
 
-          echo "::set-output name=modfile::$filename"
-          echo "::set-output name=version::$tag"
+          echo "modfile=$filename" >> $GITHUB_OUTPUT
+          echo "version=$tag" >> $GITHUB_OUTPUT
 
-      - uses: nickelc/upload-to-modio@v0.1.0
+      - uses: nickelc/upload-to-modio@curl
+        id: upload
         with:
           test-env: true
           token: ${{ secrets.MODIO_TOKEN }}
@@ -37,3 +38,8 @@ jobs:
           mod: 1041
           version: ${{ steps.package.outputs.version }}
           path: ${{ steps.package.outputs.modfile }}
+
+      - name: Test outputs
+        run: |
+          echo "id: ${{ steps.upload.outputs.id }}"
+          echo "url: ${{ steps.upload.outputs.url }}"
