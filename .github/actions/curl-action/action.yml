@@ -76,9 +76,11 @@ runs:
             curl_fields+=("'metadata_blob=<$metadata_path'")
         fi
 
-        echo "fields=$(for f in ${curl_fields[@]}; do echo -n ' -F' $f; done)" >> $GITHUB_OUTPUT
+        echo $(for f in ${curl_fields[@]}; do echo -n ' -F' $f; done)
+        # echo "fields=$(for f in ${curl_fields[@]}; do echo -n ' -F' $f; done)" >> $GITHUB_OUTPUT
 
         cat $GITHUB_OUTPUT
 
     - run: curl https://httpbin.org/post ${{ steps.form.outputs.fields }}
+      if: steps.form.outputs.fields
       shell: bash
