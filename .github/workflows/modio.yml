@@ -29,7 +29,7 @@ jobs:
           echo "modfile=$filename" >> $GITHUB_OUTPUT
           echo "version=$tag" >> $GITHUB_OUTPUT
 
-      - uses: nickelc/upload-to-modio@v1.0.7
+      - uses: nickelc/upload-to-modio@v1.0.8
         id: upload
         with:
           test-env: true
