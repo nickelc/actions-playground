@@ -8,10 +8,13 @@ jobs:
   debug:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/debug
+
       - name: Get Tag name
         id: tag_name
         shell: bash -e -O extglob {0}
-        run: echo ::set-output name=VALUE::${GITHUB_REF/refs\/+(heads|tags)\//}
+        run: echo VALUE=${GITHUB_REF/refs\/+(heads|tags)\//} >> $GITHUB_OUTPUT
       - name: Echo Tag name
         run: echo ${{ steps.tag_name.outputs.VALUE }}
       - run: env

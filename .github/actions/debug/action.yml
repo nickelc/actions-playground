@@ -1,0 +1,8 @@
+name: composite-test
+description: "test test"
+
+runs:
+  using: composite
+  steps:
+    - run: env
+      shell: bash
