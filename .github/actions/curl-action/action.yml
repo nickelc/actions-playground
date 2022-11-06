@@ -32,6 +32,9 @@ runs:
       run: |
         curl -V
         cat /etc/os-release
+
+        sudo snap install curl
+        curl -V
     - id: form
       shell: bash
       env:
