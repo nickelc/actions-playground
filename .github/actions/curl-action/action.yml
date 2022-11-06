@@ -28,6 +28,9 @@ inputs:
 runs:
   using: composite
   steps:
+    - shell: bash
+      run: |
+        curl -V
     - id: form
       shell: bash
       env:
