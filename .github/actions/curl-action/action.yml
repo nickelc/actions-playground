@@ -34,7 +34,8 @@ runs:
         cat /etc/os-release
 
         sudo snap install curl
-        curl -V
+        ls -l /snap/bin
+        /snap/bin/curl -V
     - id: form
       shell: bash
       env:
