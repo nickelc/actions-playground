@@ -31,6 +31,7 @@ runs:
     - shell: bash
       run: |
         curl -V
+        cat /etc/os-release
     - id: form
       shell: bash
       env:
