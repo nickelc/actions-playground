@@ -30,7 +30,7 @@ runs:
   steps:
     - shell: bash
       run: |
-        curl_version=$(curl -V | head 1 | cut -d ' ' -f2)
+        curl_version=$(curl -V | head -1 | cut -d ' ' -f2)
         curl -V
 
         if dpkg --compare-versions "$curl_version" lt "7.76.0"; then
