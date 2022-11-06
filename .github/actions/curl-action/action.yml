@@ -31,12 +31,11 @@ runs:
     - shell: bash
       run: |
         curl_version=$(curl -V | head -1 | cut -d ' ' -f2)
-        curl -V
 
         if dpkg --compare-versions "$curl_version" lt "7.76.0"; then
+          echo '::notice ::curl 7.76+ is required. Installing curl from snap.'
           sudo snap install curl
-          ls -l /snap/bin
-          /snap/bin/curl -V
+          echo '/snap/bin' >> $GITHUB_PATH
         fi
     - id: form
       shell: bash
