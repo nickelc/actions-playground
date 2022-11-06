@@ -90,6 +90,6 @@ runs:
 
         cat $GITHUB_OUTPUT
 
-    - run: curl https://httpbin.org/post ${{ steps.form.outputs.fields }}
+    - run: curl --fail-with-body https://httpbin.org/post ${{ steps.form.outputs.fields }}
       if: steps.form.outputs.fields
       shell: bash
