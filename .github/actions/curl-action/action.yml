@@ -36,6 +36,7 @@ runs:
           echo '::notice ::curl 7.76+ is required. Installing curl from snap.'
           # sudo snap install curl
           # echo '/snap/bin' >> $GITHUB_PATH
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           sudo brew install curl
           brew info curl
         fi
