@@ -34,8 +34,10 @@ runs:
 
         if dpkg --compare-versions "$curl_version" lt "7.76.0"; then
           echo '::notice ::curl 7.76+ is required. Installing curl from snap.'
-          sudo snap install curl
-          echo '/snap/bin' >> $GITHUB_PATH
+          # sudo snap install curl
+          # echo '/snap/bin' >> $GITHUB_PATH
+          sudo brew install curl
+          brew info curl
         fi
     - id: form
       shell: bash
