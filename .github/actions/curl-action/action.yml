@@ -37,7 +37,7 @@ runs:
           # sudo snap install curl
           # echo '/snap/bin' >> $GITHUB_PATH
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-          sudo brew install curl
+          brew install curl
           brew info curl
         fi
     - id: form
