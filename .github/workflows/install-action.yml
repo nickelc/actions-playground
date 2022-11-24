@@ -16,6 +16,6 @@ jobs:
     steps:
       - uses: taiki-e/install-action@v1
         with:
-          tool: cargo-deny
+          tool: cargo-deny@0.13.4
 
       - run: cargo deny --version
