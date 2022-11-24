@@ -1,0 +1,21 @@
+name: install-action
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+
+    steps:
+      - uses: taiki-e/install-action@v1
+        with:
+          tool: cargo-deny
+
+      - run: cargo deny --version
