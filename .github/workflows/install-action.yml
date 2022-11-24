@@ -17,4 +17,4 @@ jobs:
           tool: cargo-deny@0.13.4
       - uses: Swatinem/rust-cache@v2.2.0
 
-      - run: cargo deny --log-level debug --manifest-path cargo-deny-test list
+      - run: cargo deny --log-level debug --manifest-path cargo-deny-test/Cargo.toml list
