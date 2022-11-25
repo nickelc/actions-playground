@@ -17,6 +17,7 @@ jobs:
       #   with:
       #     tool: cargo-deny@0.13.4
 
+      - run: env
       - uses: nickelc/cargo-deny-action@composite-action
         with:
           log-level: debug
