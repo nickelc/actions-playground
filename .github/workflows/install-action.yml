@@ -13,9 +13,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: taiki-e/install-action@v1
-        with:
-          tool: cargo-deny@0.13.4
-      - uses: Swatinem/rust-cache@v2.2.0
+      # - uses: taiki-e/install-action@v1
+      #   with:
+      #     tool: cargo-deny@0.13.4
 
-      - run: cargo deny --log-level debug --manifest-path cargo-deny-test/Cargo.toml list
+      - uses: nickelc/cargo-deny-action@composite-action
+        with:
+          log-level: debug
+          command: list
+
+      - run: cargo deny --version
